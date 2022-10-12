@@ -21,9 +21,13 @@ class HotelsCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            child: Image.asset('assets/images/$image'),
+          Container(
+            height: 250,
+            width: double.infinity,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              child: Image.asset('assets/images/$image', fit: BoxFit.cover,),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
