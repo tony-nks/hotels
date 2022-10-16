@@ -34,7 +34,6 @@ class HotelAddressDetails {
   final int zip_code;
   final Map coords;
 
-
   HotelAddressDetails(
       {required this.country,
         required this.street,
@@ -47,13 +46,10 @@ class HotelAddressDetails {
   Map<String, dynamic> toJson() => _$HotelAddressDetailsToJson(this);
 }
 
-
-
 @JsonSerializable(explicitToJson: true)
 class HotelServicesDetails {
   final List free;
   final List paid;
-
 
   HotelServicesDetails(
       {required this.free,

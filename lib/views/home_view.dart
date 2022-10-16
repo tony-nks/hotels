@@ -1,17 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
-import 'package:hotels/const.dart';
+import 'package:hotels/url_addresses.dart';
 import 'package:hotels/models/hotel.dart';
 import 'package:hotels/widgets/hotels_card.dart';
 import 'package:hotels/widgets/hotels_grid_card.dart';
 import 'package:http/http.dart' as http;
 
-
 class HomeView extends StatefulWidget {
   static const routeName = '/home_page';
   HomeView({Key? key}) : super(key: key);
-
   @override
   _HomeViewState createState() => _HomeViewState();
 }
@@ -22,7 +19,6 @@ class _HomeViewState extends State<HomeView> {
   List<HotelPreview>? hotels;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
     print(hotels);
@@ -32,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       isLoading = true;
     });
-    final response = await http.get(Uri.parse(Urls().BASE_URL + Urls().ALL_HOTELS));
+    final response = await http.get(Uri.parse(UrlAddresses.BASE_URL + UrlAddresses.ALL_HOTELS));
     var data = json.decode(response.body);
     hotels = data.map<HotelPreview>((hotels) => HotelPreview.fromJson(hotels)).toList();
     setState(() {
@@ -72,14 +68,11 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: isLoading ? Center(child: CircularProgressIndicator()) :
           listView ?
-          
-          
           ListView(
             children: [
               ...?hotels?.map((hotel) {
                 return InkWell(
                   onTap: () {
-                  //  Navigator.pop(context);
                     Navigator.of(context).pushNamed('/home_page/hotel_details', arguments: hotel.uuid);
                   },
                   child: HotelsCard(title: hotel.name, image: hotel.poster),

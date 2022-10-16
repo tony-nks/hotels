@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotels/hotel_details_screen.dart';
+import 'package:hotels/views/hotel_details_screen.dart';
 import 'package:hotels/views/home_view.dart';
-
+import 'package:hotels/views/not_found_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,14 +20,13 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (RouteSettings settings){
           switch (settings.name) {
             case HomeView.routeName : return MaterialPageRoute(builder: (BuildContext context) {return HomeView();});
-            //case HotelDetailsScreen.routeName : return MaterialPageRoute(builder: (BuildContext context) {return HotelDetailsScreen(addressroute: 'sdfs');});
             case HotelDetailsScreen.routeName :
               final argumets = settings.arguments as String;
               return MaterialPageRoute(builder: (BuildContext context){
                 return HotelDetailsScreen( addressroute: argumets,);
               });
           }
-          return null;
+          return MaterialPageRoute(builder: (BuildContext context) {return NotFoundPage();});
       },
       home: HomeView(),
     );
